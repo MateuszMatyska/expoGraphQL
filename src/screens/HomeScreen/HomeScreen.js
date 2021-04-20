@@ -1,6 +1,7 @@
 import React from 'react'
-import { SafeAreaView, Text} from 'react-native'
+import { SafeAreaView, Text, ActivityIndicator} from 'react-native'
 import { gql, useQuery } from '@apollo/client'
+import List from '../../components/List'
 import {styles} from './styles'
 
 // const CHAPTERS_QUERY = gql`
@@ -26,11 +27,11 @@ const HomeScreen = () => {
     // console.log(data);
 
     const { data, loading } = useQuery(query)
-    console.log(data);
 
-    return <SafeAreaView style={styles.container}>
-        <Text>Download Data</Text>
-    </SafeAreaView>
+    return ( loading ? <ActivityIndicator /> : <SafeAreaView style={styles.container}>
+        <List data={data.person}/>
+    </SafeAreaView> 
+    )
 }
 
 export default HomeScreen;
